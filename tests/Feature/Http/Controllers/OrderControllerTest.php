@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\IdCart;
 use App\Models\Order;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -62,16 +62,16 @@ class OrderControllerTest extends TestCase
     public function store_saves_and_redirects()
     {
         $date_order = $this->faker->date();
-        $id_cart = IdCart::factory()->create();
+        $user = User::factory()->create();
 
         $response = $this->post(route('order.store'), [
             'date_order' => $date_order,
-            'id_cart' => $id_cart->id,
+            'user_id' => $user->id,
         ]);
 
         $orders = Order::query()
             ->where('date_order', $date_order)
-            ->where('id_cart', $id_cart->id)
+            ->where('user_id', $user->id)
             ->get();
         $this->assertCount(1, $orders);
         $order = $orders->first();
@@ -130,11 +130,11 @@ class OrderControllerTest extends TestCase
     {
         $order = Order::factory()->create();
         $date_order = $this->faker->date();
-        $id_cart = IdCart::factory()->create();
+        $user = User::factory()->create();
 
         $response = $this->put(route('order.update', $order), [
             'date_order' => $date_order,
-            'id_cart' => $id_cart->id,
+            'user_id' => $user->id,
         ]);
 
         $order->refresh();
@@ -143,7 +143,7 @@ class OrderControllerTest extends TestCase
         $response->assertSessionHas('order.id', $order->id);
 
         $this->assertEquals(Carbon::parse($date_order), $order->date_order);
-        $this->assertEquals($id_cart->id, $order->id_cart);
+        $this->assertEquals($user->id, $order->user_id);
     }
 
 

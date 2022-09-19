@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCartItemTable extends Migration
+class CreateItemUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,10 @@ class CreateCartItemTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('cart_item', function (Blueprint $table) {
-            $table->foreignId('cart_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+        Schema::create('cart', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
 
         Schema::enableForeignKeyConstraints();
@@ -30,6 +31,6 @@ class CreateCartItemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cart_item');
+        Schema::dropIfExists('item_user');
     }
 }

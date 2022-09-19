@@ -16,7 +16,7 @@ class Order extends Model
      */
     protected $fillable = [
         'date_order',
-        'id_cart',
+        'user_id',
     ];
 
     /**
@@ -27,11 +27,16 @@ class Order extends Model
     protected $casts = [
         'id' => 'integer',
         'date_order' => 'date',
-        'id_cart' => 'integer',
+        'user_id' => 'integer',
     ];
 
-    public function idCart()
+    public function items()
     {
-        return $this->belongsTo(IdCart::class);
+        return $this->belongsToMany(Item::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

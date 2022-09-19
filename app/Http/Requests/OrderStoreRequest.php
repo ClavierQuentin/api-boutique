@@ -25,7 +25,7 @@ class OrderStoreRequest extends FormRequest
     {
         return [
             'date_order' => ['required', 'date'],
-            'id_cart' => ['required'],
+            'user_id' => ['required', 'integer', 'exists:users,id'],
         ];
     }
 }

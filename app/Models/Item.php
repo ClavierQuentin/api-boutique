@@ -31,8 +31,13 @@ class Item extends Model
         'price' => 'decimal',
     ];
 
-    public function carts()
+    public function users()
     {
-        return $this->belongsToMany(Cart::class);
+        return $this->belongsToMany(User::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
     }
 }

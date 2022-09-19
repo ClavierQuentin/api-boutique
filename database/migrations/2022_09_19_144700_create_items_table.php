@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->decimal('price');
+            $table->text('image_url');
             $table->timestamps();
         });
     }
@@ -28,4 +32,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('items');
     }
-};
+}

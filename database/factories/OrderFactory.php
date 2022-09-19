@@ -4,8 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\IdCart;
 use App\Models\Order;
+use App\Models\User;
 
 class OrderFactory extends Factory
 {
@@ -25,7 +25,7 @@ class OrderFactory extends Factory
     {
         return [
             'date_order' => $this->faker->date(),
-            'id_cart' => IdCart::factory(),
+            'user_id' => User::factory(),
         ];
     }
 }
