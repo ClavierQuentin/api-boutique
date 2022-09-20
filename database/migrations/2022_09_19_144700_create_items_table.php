@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->decimal('price');
+            $table->decimal('price', 6, 2);
             $table->text('image_url');
             $table->timestamps();
         });
