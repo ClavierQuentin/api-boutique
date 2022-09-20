@@ -19,10 +19,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/login', function () {
+    // Only authenticated users may access this route...
+})->middleware('auth.basic');
+
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::resource('item', App\Http\Controllers\ItemController::class);
 
 Route::resource('order', App\Http\Controllers\OrderController::class);
+
+Route::post('/enregistrement', [\App\Http\Controllers\UtilisateurController::class, 'register']);
+
+
 
