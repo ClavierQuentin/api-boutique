@@ -25,8 +25,8 @@ class ItemFactory extends Factory
         return [
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->text,
-            'price' => $this->faker->randomFloat(0, 0, 9999999999.),
-            'image_url' => $this->faker->text,
+            'price' => $this->faker->randomFloat(2, 0, 9999.),
+            'image_url' => $this->faker->imageUrl(640, 480, 'stars', true),
         ];
     }
 }
