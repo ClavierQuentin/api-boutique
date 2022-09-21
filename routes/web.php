@@ -32,7 +32,6 @@ Route::resource('item', App\Http\Controllers\ItemController::class);
 
 Route::resource('order', App\Http\Controllers\OrderController::class);
 
-Route::post('/enregistrement', [\App\Http\Controllers\UtilisateurController::class, 'register']);
 
 
 
