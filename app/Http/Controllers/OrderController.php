@@ -24,12 +24,8 @@ class OrderController extends Controller
             "user_id" => Auth::user()->id,
             "date_order" => Date::now()
         ]);
-<<<<<<< HEAD
 
 
-=======
-        $itemsCart = Auth::user()->items()->get();
->>>>>>> 043cd83152a9a6ebbd77365016590eed4519f193
         $total = Auth::user()->items()->sum('price');
 
         foreach($itemsCart as $item) {
@@ -60,11 +56,7 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-<<<<<<< HEAD
         $order = $request->user()->orders()->with('items')->get();
-=======
-        $order = Auth::user()->orders()->with('items')->get();
->>>>>>> 043cd83152a9a6ebbd77365016590eed4519f193
 
         return response()->json($order);
     }
