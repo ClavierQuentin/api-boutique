@@ -19,6 +19,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/login', function () {
+    // Only authenticated users may access this route...
+})->middleware('auth.basic');
+
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
 
 
