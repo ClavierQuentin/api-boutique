@@ -7,16 +7,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use App\Http\Requests\OrderStoreRequest;
 use App\Http\Requests\OrderUpdateRequest;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
 
-    public function store(OrderStoreRequest $request)
+    public function validateOrder()
     {
         $order = Order::create([
-            "id_user" => auth()->user()->id,
+            "user_id" => Auth::user()->id,
             "date_order" => Date::now()
         ]);
-    }
+        $itemsCart = Auth::user()->items()->get();
+        foreach($itemsCart as $item) {
+            $order->items()->attach($item);
+            $item->users()->detach(Auth::user());
+        };
 
+    }
 }

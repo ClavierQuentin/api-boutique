@@ -43,19 +43,19 @@ class ItemController extends Controller
      */
     public function cart(Request $request)
     {
-        $cart = Auth::user()->items->get();
+        $cart = Auth::user()->items()->get();
 
         return response()->json($cart);
     }
 
     public function deleteArticle(Request $request, Item $item){
 
-        $item->users->detach(Auth::user());
+        $item->users()->detach(Auth::user());
     }
 
     public function ajoutArticle(Request $request, Item $item)
     {
-        $item->users->attach(Auth::user());
+        $item->users()->attach(Auth::user());
     }
 }
 
