@@ -25,7 +25,6 @@ class OrderController extends Controller
             "date_order" => Date::now()
         ]);
 
-
         $total = Auth::user()->items()->sum('price');
 
         foreach($itemsCart as $item) {
