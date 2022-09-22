@@ -28,7 +28,7 @@ class Item extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'price' => 'decimal',
+        'price' => 'float',
     ];
 
     public function users()
