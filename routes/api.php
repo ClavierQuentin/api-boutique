@@ -38,16 +38,3 @@ Route::post('/register',[AuthController::class, 'registerUser']);
 Route::post('/login',[AuthController::class, 'loginuser']);
 Route::get('/logout',[AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-Route::get('send-mail', function () {
-
-    $details = [
-
-        'title' => 'Mail from ItSolutionStuff.com',
-
-        'body' => 'This is for testing email using smtp'
-
-    ];
-
-    // Mail::to('a.raguenes@gmail.com')->send(new \App\Mail\MyTestMail($details));
-    Mail::to('clavier.quentin@gmail.com')->send(new \App\Mail\MyTestMail($details));
-});

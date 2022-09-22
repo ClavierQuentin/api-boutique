@@ -51,11 +51,15 @@ class ItemController extends Controller
     public function deleteArticle(Item $item){
 
         $item->users()->detach(Auth::user());
+
+        return response()->json('Article supprimé');
     }
 
     public function ajoutArticle(Item $item)
     {
         $item->users()->attach(Auth::user());
+
+        return response()->json('Article rajouté au panier');
     }
 }
 

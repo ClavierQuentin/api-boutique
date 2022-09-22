@@ -30,6 +30,7 @@ class Order extends Model
         'user_id' => 'integer',
     ];
 
+
     public function items()
     {
         return $this->belongsToMany(Item::class);
