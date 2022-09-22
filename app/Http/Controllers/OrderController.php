@@ -20,6 +20,8 @@ class OrderController extends Controller
             "date_order" => Date::now()
         ]);
         $itemsCart = Auth::user()->items()->get();
+        $total = Auth::user()->items()->sum('price');
+
         foreach($itemsCart as $item) {
             $order->items()->attach($item);
             $item->users()->detach(Auth::user());
@@ -28,7 +30,7 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $order =$request->user()->orders()->with('items')->get();
+        $order = Auth::user()->orders()->with('items')->get();
 
         return response()->json($order);
     }

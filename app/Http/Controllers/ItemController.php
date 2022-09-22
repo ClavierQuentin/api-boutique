@@ -44,8 +44,9 @@ class ItemController extends Controller
     public function cart()
     {
         $cart = Auth::user()->items()->get();
+        $total = Auth::user()->items()->sum('price');
 
-        return response()->json($cart);
+        return response()->json([$cart, $total]);
     }
 
     public function deleteArticle(Item $item){
