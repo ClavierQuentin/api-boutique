@@ -23,11 +23,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('item', App\Http\Controllers\ItemController::class);
 
-Route::resource('order', OrderController::class);
+Route::resource('order', OrderController::class)->middleware('auth:sanctum');
 
 Route::get('buy', [OrderController::class, 'validateOrder'])->middleware('auth:sanctum');
 
-Route::get('cart', [ItemController::class,'cart'])->middleware('auth:sanctum');;
+Route::get('cart', [ItemController::class,'cart'])->middleware('auth:sanctum');
 
 Route::delete('cart/{item}', [ItemController::class,'deleteArticle'])->middleware('auth:sanctum');
 
