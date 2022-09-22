@@ -28,10 +28,6 @@ Route::get('/login', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::resource('item', App\Http\Controllers\ItemController::class);
-
-Route::resource('order', App\Http\Controllers\OrderController::class);
-
 
 
 
