@@ -24,7 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('item', App\Http\Controllers\ItemController::class);
+Route::resource('item', App\Http\Controllers\ItemController::class)->except(['store', 'update', 'delete']);
+
+Route::post('item', [ItemController::class,'store'])->middleware(['auth:sanctum','role:admin']);
+
+Route::put('item/{item}', [ItemController::class,'update'])->middleware(['auth:sanctum','role:admin']);
 
 Route::resource('order', OrderController::class)->middleware('auth:sanctum');
 
@@ -34,15 +38,10 @@ Route::get('buy', [OrderController::class, 'validateOrder'])->middleware('auth:s
 
 Route::get('cart', [ItemController::class,'cart'])->middleware('auth:sanctum');
 
-Route::delete('cart/{item}', [ItemController::class,'deleteArticle']);
+Route::delete('cart/{item}', [ItemController::class,'deleteArticle'])->middleware('auth:sanctum');
 
-Route::post('cart/{item}', [ItemController::class,'ajoutArticle']);
+Route::post('cart/{item}', [ItemController::class,'ajoutArticle'])->middleware('auth:sanctum');
 
 Route::post('/register',[AuthController::class, 'registerUser']);
 Route::post('/login',[AuthController::class, 'loginuser']);
 Route::get('/logout',[AuthController::class, 'logout'])->middleware('auth:sanctum');
-
-Route::middleware(['auth:sanctum','role:admin'])->get('/users', function (){
-    $users = User::all();
-    return response()->json($users);
-});
