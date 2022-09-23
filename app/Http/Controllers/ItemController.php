@@ -31,6 +31,8 @@ class ItemController extends Controller
     public function store(ItemStoreRequest $request)
     {
         $item = Item::create($request->except('_token'));
+
+        return response()->json($item);
     }
 
     /**
@@ -52,9 +54,12 @@ class ItemController extends Controller
     * @param \App\Models\item $item
     * @return \Illuminate\Http\Response
     */
-    public function update(ItemUpdateRequest $request, item $item)
+    public function update(ItemUpdateRequest $request, Item $item)
     {
+        return response()->json([$item, $request->attributes()]);
+
         $item->update($request->except('_token'));
+
     }
 
     /**
