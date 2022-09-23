@@ -34,9 +34,9 @@ Route::get('buy', [OrderController::class, 'validateOrder'])->middleware('auth:s
 
 Route::get('cart', [ItemController::class,'cart'])->middleware('auth:sanctum');
 
-Route::delete('cart/{item}', [ItemController::class,'deleteArticle']);
+Route::delete('cart/{item}', [ItemController::class,'deleteArticle'])->middleware('auth:sanctum');
 
-Route::post('cart/{item}', [ItemController::class,'ajoutArticle']);
+Route::post('cart/{item}', [ItemController::class,'ajoutArticle'])->middleware('auth:sanctum');
 
 Route::post('/register',[AuthController::class, 'registerUser']);
 Route::post('/login',[AuthController::class, 'loginuser']);
