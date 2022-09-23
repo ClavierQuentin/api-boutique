@@ -24,10 +24,10 @@ class ItemUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string'],
-            'description' => ['string'],
-            'price' => ['required', 'numeric'],
-            'image_url' => ['required', 'string'],
+            // 'title' => ['required', 'string'],
+            // 'description' => ['string'],
+            // 'price' => ['required', 'numeric'],
+            // 'image_url' => ['required', 'string'],
         ];
     }
 }
