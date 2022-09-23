@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+    * @param \Illuminate\Http\Request $request
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
         $items = Item::all();
@@ -22,13 +22,22 @@ class ItemController extends Controller
         return response()->json($items);
     }
 
-
+    /**
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\ItemStoreRequest  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function store(ItemStoreRequest $request)
+    {
+        $item = Item::create($request->except('_token'));
+    }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Item $item
-     * @return \Illuminate\Http\Response
-     */
+    * @param \Illuminate\Http\Request $request
+    * @param \App\Models\Item $item
+    * @return \Illuminate\Http\Response
+    */
     public function show(Item $item)
     {
         $article = Item::find($item);
@@ -37,10 +46,22 @@ class ItemController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Item $item
-     * @return \Illuminate\Http\Response
-     */
+    * Update the specified resource in storage.
+    *
+    * @param \App\Http\Requests\ItemUpdateRequest $request
+    * @param \App\Models\item $item
+    * @return \Illuminate\Http\Response
+    */
+    public function update(ItemUpdateRequest $request, item $item)
+    {
+        $item->update($request->except('_token'));
+    }
+
+    /**
+    * @param \Illuminate\Http\Request $request
+    * @param \App\Models\Item $item
+    * @return \Illuminate\Http\Response
+    */
     public function cart()
     {
         $cart = Auth::user()->items()->get();
@@ -58,7 +79,7 @@ class ItemController extends Controller
 
     public function ajoutArticle(Item $item, Request $request)
     {
-        $item->users()->attach($request->user());
+        $item->users()->attach(Auth::user());
 
         return response()->json('Article rajouté au panier');
     }
