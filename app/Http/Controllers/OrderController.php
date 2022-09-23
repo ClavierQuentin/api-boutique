@@ -49,14 +49,40 @@ class OrderController extends Controller
         return response()->json([
             $order,
             $order->items()->get(),
-            $total
+            'total'=>$total
         ]);
     }
 
     public function index(Request $request)
     {
-        $order = $request->user()->orders()->with('items')->get();
+        $orders = $request->user()->orders()->with('items')->get();
 
-        return response()->json($order);
+        $commandes = [];
+
+        foreach($orders as $order){
+            $commandes[] = $order;
+            $commandes[] = array('total',$order->items->sum('price')) ;
+        }
+
+        return response()->json($commandes);
+    }
+
+    public function dashBoard()
+    {
+        $users = User::all();
+
+        $commandes = [];
+
+        foreach ($users as $user){
+
+            $orders = $user->orders()->with('items')->get();
+
+            foreach($orders as $order){
+
+                $commandes[] = $order;
+                $commandes[] = array('total',$order->items->sum('price')) ;
+            }
+        }
+        return response()->json($commandes);
     }
 }

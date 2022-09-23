@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -42,6 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public $with = ['role'];
+
     public function orders()
     {
         return $this->hasMany(Order::class);
@@ -50,5 +54,18 @@ class User extends Authenticatable
     public function items()
     {
         return $this->belongsToMany(Item::class, 'cart');
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasRole($role)
+    {
+        // $roleUser = DB::table('roles')->where('role','=', $role)->get()->first();
+        if($this->role()->where('role', $role)->first()){
+            return true;
+        }
+        return false;
     }
 }

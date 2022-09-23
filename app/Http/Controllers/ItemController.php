@@ -46,19 +46,19 @@ class ItemController extends Controller
         $cart = Auth::user()->items()->get();
         $total = Auth::user()->items()->sum('price');
 
-        return response()->json([$cart, $total]);
+        return response()->json([$cart, 'total'=>$total]);
     }
 
-    public function deleteArticle(Item $item){
+    public function deleteArticle(Item $item, Request $request){
 
         $item->users()->detach(Auth::user());
 
         return response()->json('Article supprimé');
     }
 
-    public function ajoutArticle(Item $item)
+    public function ajoutArticle(Item $item, Request $request)
     {
-        $item->users()->attach(Auth::user());
+        $item->users()->attach($request->user());
 
         return response()->json('Article rajouté au panier');
     }
