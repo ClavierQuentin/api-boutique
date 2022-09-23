@@ -28,7 +28,7 @@ Route::resource('item', App\Http\Controllers\ItemController::class)->except(['st
 
 Route::post('item', [ItemController::class,'store'])->middleware(['auth:sanctum','role:admin']);
 
-Route::put('item/{item}', [ItemController::class,'update'])->middleware(['auth:sanctum','role:admin']);
+Route::post('item/{item}', [ItemController::class,'update'])->middleware(['auth:sanctum','role:admin']);
 
 Route::resource('order', OrderController::class)->middleware('auth:sanctum');
 

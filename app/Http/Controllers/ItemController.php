@@ -48,11 +48,11 @@ class ItemController extends Controller
     /**
     * Update the specified resource in storage.
     *
-    * @param \App\Http\Requests\ItemUpdateRequest $request
+    * @param \App\Http\Requests\Request $request
     * @param \App\Models\item $item
     * @return \Illuminate\Http\Response
     */
-    public function update(ItemUpdateRequest $request, item $item)
+    public function update(Request $request, Item $item)
     {
         $item->update($request->except('_token'));
     }
